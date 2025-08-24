@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Grüne - Web Page Clone</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ===== GLOBAL STYLES & VARIABLES ===== */
+        :root {
+            --electric-lime: #ccff00;
+            --dark-bg: #111111;
+            --light-text: #f0f0f0;
+            --grey-text: #888888;
+            --border-color: #444444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        header nav ul li a {
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        header nav ul li a:hover {
+            color: var(--electric-lime);
+        }
+
+        .cta-button {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--electric-lime);
+            color: var(--dark-bg);
+            border-color: var(--electric-lime);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 4rem;
+        }
+
+        .hero-content {
+            flex-basis: 60%;
+        }
+
+        .hero-content h1 {
+            font-size: 10rem;
+            font-weight: 900;
+            color: var(--electric-lime);
+            line-height: 0.9;
+            letter-spacing: -5px;
+        }
+
+        .badges {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .badge {
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-side {
+            flex-basis: 30%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: url(https://images.unsplash.com/photo-1598993291395-9b7b6c7a6b6f?w=500&auto=format&fit=crop&q=60) center/cover;
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+
+        .play-button::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 18px solid white;
+            margin-left: 5px;
+        }
+
+        .hero-side p {
+            margin-top: 2rem;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--grey-text);
+        }
+
+        /* ===== MAIN VISUAL ===== */
+        .main-visual {
+            position: relative;
+            margin-top: 4rem;
+            width: 100%;
+            padding: 0 4rem;
+        }
+
+        .main-visual img {
+            width: 100%;
+            height: auto;
+            border-radius: 40px;
+            display: block;
+        }
+
+        .arrow-button {
+            position: absolute;
+            top: -50px;
+            right: 80px;
+            width: 120px;
+            height: 120px;
+            background-color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            color: var(--light-text);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .arrow-button:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* ===== TICKER ===== */
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--electric-lime);
+            color: var(--dark-bg);
+            padding: 1.5rem 0;
+            margin-top: 6rem;
+            transform: rotate(-2deg);
+        }
+
+        .ticker {
+            display: flex;
+            width: 200%;
+            font-size: 2rem;
+            font-weight: 700;
+            animation: ticker-scroll 20s linear infinite;
+        }
+
+        .ticker span {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .ticker .star {
+            font-size: 1.5rem;
+        }
+
+        @keyframes ticker-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            padding: 8rem 0;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+        }
+
+        .services .strikethrough {
+            position: relative;
+            display: inline-block;
+        }
+
+        .services .strikethrough::after {
+            content: '';
+            position: absolute;
+            left: -5%;
+            top: 55%;
+            width: 110%;
+            height: 6px;
+            background-color: var(--electric-lime);
+            transform: translateY(-50%);
+        }
+
+        .services-intro {
+            max-width: 500px;
+            margin: 1.5rem auto 3rem;
+            color: var(--grey-text);
+            line-height: 1.7;
+        }
+
+        .service-tags {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background-color: var(--light-text);
+            color: var(--dark-bg);
+            border-color: var(--light-text);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">Das Grüne</div>
+            <nav>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Project</a></li>
+                    <li><a href="#">Services</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="cta-button">Let's Talk</a>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>DÏGITIZE<br>IDEAS</h1>
+                    <div class="badges">
+                        <span class="badge"><i class="fas fa-award"></i> 2022 Best Agency</span>
+                        <span class="badge"><i class="fas fa-globe"></i> World Class Agency</span>
+                    </div>
+                </div>
+                <div class="hero-side">
+                    <div class="video-placeholder">
+                        <div class="play-button"></div>
+                    </div>
+                    <p>The art of visual communication, creatively impacting the world around us—one good design at a time, design like you mean it!</p>
+                </div>
+            </section>
+
+            <section class="main-visual">
+                <img src="https://images.unsplash.com/photo-1639749629141-c7c98c19b88c?q=80&w=2070&auto=format&fit=crop" alt="Abstract 3D colorful art">
+                <a href="#" class="arrow-button">
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+            </section>
+        </main>
+    </div>
+
+    <section class="ticker-wrap">
+        <div class="ticker">
+            <span>DISCUSS YOUR IDEAS <i class="fas fa-star-of-life star"></i></span>
+            <span>DISCUSS YOUR IDEAS <i class="fas fa-star-of-life star"></i></span>
+            <span>DISCUSS YOUR IDEAS <i class="fas fa-star-of-life star"></i></span>
+            <span>DISCUSS YOUR IDEAS <i class="fas fa-star-of-life star"></i></span>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="services">
+            <h2>OUR <span class="strikethrough">SERVICES</span>.</h2>
+            <p class="services-intro">Every one of us loves something different. So, explore the world through the lens of our visual capabilities, and find what you love.</p>
+            <div class="service-tags">
+                <a href="#" class="tag">Design</a>
+                <a href="#" class="tag">Development</a>
+                <a href="#" class="tag">Digital Marketing</a>
+                <a href="#" class="tag">SEO</a>
+            </div>
+        </section>
+    </div>
+
+</body>
+</html>
